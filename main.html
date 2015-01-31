@@ -60,9 +60,6 @@
 					count = count + 1;
 				}
 
-				console.log(languageArray.length);
-				display ();
-
 			}
 
 			function openGist () {
@@ -130,9 +127,16 @@
 			}
 		}
 
-		function display () {
-			for (var z=0; z<languageArray.length; z++) {
-				console.log(languageArray[z]);
+		function displayResults () {
+
+			var dispArea = document.getElementById("results");
+			var text;
+			for (var z=0; z<htmlArray.length; z++) {
+				text = htmlArray[z].toString();
+				var newP = document.createElement("p");
+				var addText = document.createTextNode(text);
+				newP.appendChild(addText);
+				dispArea.appendChild(newP);
 			}
 		}
 
@@ -179,14 +183,12 @@
 			<button type = "submit" onClick="controlGist();">Connect to Gists</button>
 		</p>
 		<p>
-			<button type = "submit" onClick="openGist();">Show Results</button>
+			<button type = "submit" onClick="displayResults();">Show Results</button>
 		</p>
 		<div id = "test">
 			successful?
 		</div>
-		<div id = "results">
-
-		</div>
+		<div id = "results"></div>
 	</body>
 
 </html>
