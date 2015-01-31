@@ -4,25 +4,31 @@
 	<head>
 		<script>
 
+			var number = 3;
+			var count = 1;
+			var languageArray = [];
+			var htmlArray = [];
+
+			function controlGist() {
+				for (var i=0; i<number; i++) {
+					openGist();
+					count = count + 1;
+				}
+			}
+
 			function openGist () {
 
-				var successful = false;
-				var number = 3;
-				var count = 1;
-
-				for (var a=0; a<3; a++) {
+				
+				
 
 				var url;
 				console.log("tiffany");
 				var request = new XMLHttpRequest();
 				url = 'https://api.github.com/gists' + '?page=' + count;
-				successful = false;
-				count = count + 1;
 				console.log(count);
 				request.onreadystatechange = ifready;
 				request.open('GET', url, true);
 				request.send();
-				console.log("count: " + count + " successful: " + successful);
 
 
 				/*for (var i=0; i<number; i++) {
@@ -49,8 +55,6 @@
 						var data = JSON.parse(request.responseText);
 						console.log(data[0].html_url);
 						getArray(data);
-						successful = true;
-						console.log("inside successful: " + successful + count);
 					}
 					else {
 						document.getElementById("test").innerHTML = "no success!";
@@ -58,11 +62,6 @@
 					console.log("Bye");
 				}
 				
-			} 
-				
-
-			var languageArray = [];
-			var htmlArray = [];
 
 			function getArray (input) {
 				var parent;
@@ -109,7 +108,7 @@
 
 	<body>
 		<p>
-			<button type = "submit" onClick="openGist();">Connect to Gists</button>
+			<button type = "submit" onClick="controlGist();">Connect to Gists</button>
 		</p>
 		<p>
 			<form id = "resultsForm" onSubmit="return openGist();">
