@@ -5,40 +5,103 @@
 		<script>
 
 			function openGist () {
-				var request = new XMLHttpRequest();
 
-				request.open('GET', 'https://api.github.com/gists', true);
-				request.send();
-
-				request.onreadystatechange = ifready;
-
+				var number = 3;
+				var url;
+				for (var i=0; i<number; i++) {
+					var request = new XMLHttpRequest();
+					url = 'https://api.github.com/gists' + '?page=' + (i+1);
+					request.open('GET', url, true);
+					request.send();
+					request.onreadystatechange = ifReady;
+				}
+			}
+			
+			function ifReady () {
+				var data = JSON.parse(request.responseText);
+				console.log(data[0].html_url);
+			}
+		
+				//request.open('GET', 'https://api.github.com/gists?page=2', true);
+/*
 				function ifready() {
 					if (request.readyState === 4) {
-						document.getElementById("test").innerHTML = "success!";
-						if (request.status === 200) {
-							var data = JSON.parse(request.responseText);
-							makeArray(data);
-						}
+						var data = JSON.parse(request.responseText);
+						console.log(data[0].html_url);
+						getArray(data);
 					}
 					else {
 						document.getElementById("test").innerHTML = "no success!";
 					}
 				}
+				*/
 
-				function makeArray (input) {
-					for (var i=0; i<input.length; i++) {
-						// isolate html_url and the url (before files, count); make array and return it
+			var languageArray = [];
+			var htmlArray = [];
+
+			function getArray (input) {
+				var parent;
+				var fileName;
+				for (var i=0; i<input.length; i++) {
+					htmlArray.push(input[i].html_url);
+
+					parent = input[i].files;
+					for (var property in parent) {
+						fileName = property;
 					}
-				}
 
-		
-			
+					for (var cProp in parent[fileName]) {
+						if (cProp === "language") {
+							languageArray.push(parent[fileName][cProp]);
+						}
+					}	
+
+				}
+			console.log (htmlArray.length);
+
 			}
+
+/*
+				function getArray (input) {
+					var parent = input[0].files;
+					for (var prop in parent) {
+						var fileName = prop;
+					}
+					console.log(fileName);
+					for (var property in parent[fileName]) {
+						if (property === "language") {
+							console.log (parent[fileName][property]);
+						}
+					}
+					//for (var i=0; i<input.length; i++) {
+						// isolate html_url and the url (before files, count); make array and return it
+					//}
+				}*/
+
 		</script>
 	</head>
 
 	<body>
-		<p><a href="JavaScript:void(0)" onClick="openGist();">Connect</a>
+		<p>
+			<button type = "submit" onClick="openGist();">Connect to Gists</button>
+		</p>
+		<p>
+			<form id = "resultsForm" onSubmit="return openGist();">
+				<legend>Number of Results:</legend>
+					<input type="radio" id="noResults" value="30" />
+					<label for "noResults">30</label>
+					<input type="radio" id="noResults" value="60" />
+					<label for "noResults">60</label>
+					<input type="radio" id="noResults" value="90" />
+					<label for "noResults">90</label>
+					<input type="radio" id="noResults" value="120" />
+					<label for "noResults">120</label>
+					<input type="radio" id="noResults" value="150" />
+					<label for "noResults">150</label>
+				<button type = "submit">Set and Connect to Gists</button>				
+			</form>
+			<button type = "submit" onClick="openGist();">Show Results</button>
+		</p>
 		<div id = "test">
 			successful?
 		</div>
