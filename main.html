@@ -6,14 +6,24 @@
 
 			function openGist () {
 
+				var successful = false;
 				var number = 3;
+				var count = 1;
+
+				for (var a=0; a<3; a++) {
+
 				var url;
 				console.log("tiffany");
 				var request = new XMLHttpRequest();
-				url = 'https://api.github.com/gists' + '?page=' + (1);
+				url = 'https://api.github.com/gists' + '?page=' + count;
+				successful = false;
+				count = count + 1;
+				console.log(count);
 				request.onreadystatechange = ifready;
 				request.open('GET', url, true);
 				request.send();
+				console.log("count: " + count + " successful: " + successful);
+
 
 				/*for (var i=0; i<number; i++) {
 					var request = new XMLHttpRequest();
@@ -39,12 +49,16 @@
 						var data = JSON.parse(request.responseText);
 						console.log(data[0].html_url);
 						getArray(data);
+						successful = true;
+						console.log("inside successful: " + successful + count);
 					}
 					else {
 						document.getElementById("test").innerHTML = "no success!";
 					}
 					console.log("Bye");
 				}
+				
+			} 
 				
 
 			var languageArray = [];
