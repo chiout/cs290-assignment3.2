@@ -15,11 +15,24 @@
 				function ifready() {
 					if (request.readyState === 4) {
 						document.getElementById("test").innerHTML = "success!";
+						if (request.status === 200) {
+							var data = JSON.parse(request.responseText);
+							makeArray(data);
+						}
 					}
 					else {
 						document.getElementById("test").innerHTML = "no success!";
 					}
 				}
+
+				function makeArray (input) {
+					for (var i=0; i<input.length; i++) {
+						// isolate html_url and the url (before files, count); make array and return it
+					}
+				}
+
+		
+			
 			}
 		</script>
 	</head>
@@ -28,6 +41,9 @@
 		<p><a href="JavaScript:void(0)" onClick="openGist();">Connect</a>
 		<div id = "test">
 			successful?
+		</div>
+		<div id = "results">
+
 		</div>
 	</body>
 
