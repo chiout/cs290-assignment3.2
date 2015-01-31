@@ -4,22 +4,68 @@
 	<head>
 		<script>
 
-			var number = 3;
+			var number;
 			var count = 1;
 			var languageArray = [];
 			var htmlArray = [];
+
+
+			window.onload = function () {
+				/*var form = document.getElementById("resultsForm");
+				form.onsubmit = setNumber;*/
+
+				var opt1 = document.getElementById("noResults1");
+				var opt2 = document.getElementById("noResults2");
+				var opt3 = document.getElementById("noResults3");
+				var opt4 = document.getElementById("noResults4");
+				var opt5 = document.getElementById("noResults5");
+
+				opt1.onclick = setNumber30;
+				opt2.onclick = setNumber60;
+				opt3.onclick = setNumber90;
+				opt4.onclick = setNumber120;
+				opt5.onclick = setNumber150;
+
+				function setNumber30 () {
+					number = 1;
+					console.log(number);
+				}
+
+				function setNumber60 () {
+					number = 2;
+					console.log(number);
+				}
+
+				function setNumber90 () {
+					number = 3;
+					console.log(number);
+				}
+			
+				function setNumber120 () {
+					number = 4;
+					console.log(number);
+				}
+
+				function setNumber150 () {
+					number = 5;
+					console.log(number);
+				}
+
+			}
+			
 
 			function controlGist() {
 				for (var i=0; i<number; i++) {
 					openGist();
 					count = count + 1;
 				}
+
+				console.log(languageArray.length);
+				display ();
+
 			}
 
 			function openGist () {
-
-				
-				
 
 				var url;
 				console.log("tiffany");
@@ -50,7 +96,6 @@
 				//request.open('GET', 'https://api.github.com/gists?page=2', true);
 
 				function ifready() {
-					console.log("Hi");
 					if (request.readyState === 4) {
 						var data = JSON.parse(request.responseText);
 						console.log(data[0].html_url);
@@ -59,7 +104,6 @@
 					else {
 						document.getElementById("test").innerHTML = "no success!";
 					}
-					console.log("Bye");
 				}
 				
 
@@ -81,10 +125,18 @@
 					}	
 
 				}
-			console.log (htmlArray.length);
+			//console.log (htmlArray.length);
 
 			}
 		}
+
+		function display () {
+			for (var z=0; z<languageArray.length; z++) {
+				console.log(languageArray[z]);
+			}
+		}
+
+
 
 /*
 				function getArray (input) {
@@ -107,24 +159,26 @@
 	</head>
 
 	<body>
+		<h3>Please select the number of results and click on 'Connect to Gist'. Afterwards, please click 'Show Results'.</h3>
+		<p>
+			<form id = "resultsForm">
+				<legend>Select the Number of Results:</legend>
+					<input type="radio" id="noResults1" value="30" name="pick" />
+					<label for "noResults">30</label>
+					<input type="radio" id="noResults2" value="60" name="pick"/>
+					<label for "noResults">60</label>
+					<input type="radio" id="noResults3" value="90" name="pick"/>
+					<label for "noResults">90</label>
+					<input type="radio" id="noResults4" value="120" name="pick"/>
+					<label for "noResults">120</label>
+					<input type="radio" id="noResults5" value="150" name="pick"/>
+					<label for "noResults">150</label>
+			</form>
+		</p>
 		<p>
 			<button type = "submit" onClick="controlGist();">Connect to Gists</button>
 		</p>
 		<p>
-			<form id = "resultsForm" onSubmit="return openGist();">
-				<legend>Number of Results:</legend>
-					<input type="radio" id="noResults" value="30" />
-					<label for "noResults">30</label>
-					<input type="radio" id="noResults" value="60" />
-					<label for "noResults">60</label>
-					<input type="radio" id="noResults" value="90" />
-					<label for "noResults">90</label>
-					<input type="radio" id="noResults" value="120" />
-					<label for "noResults">120</label>
-					<input type="radio" id="noResults" value="150" />
-					<label for "noResults">150</label>
-				<button type = "submit">Set and Connect to Gists</button>				
-			</form>
 			<button type = "submit" onClick="openGist();">Show Results</button>
 		</p>
 		<div id = "test">
