@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script>
+
+			function openGist () {
+				var request = new XMLHttpRequest();
+
+				request.open('GET', 'https://api.github.com/gists', true);
+				request.send();
+
+				request.onreadystatechange = ifready;
+
+				function ifready() {
+					if (request.readyState === 4) {
+						document.getElementById("test").innerHTML = "success!";
+					}
+					else {
+						document.getElementById("test").innerHTML = "no success!";
+					}
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<p><a href="JavaScript:void(0)" onClick="openGist();">Connect</a>
+		<div id = "test">
+			successful?
+		</div>
+	</body>
+
+</html>
