@@ -160,19 +160,18 @@
 
 			}
 		}
-
+		
 		function displayResults () {
+			
 			var dispArea = document.getElementById("results");
-			var i = 0
-			var alreadyDisplayed = 0;
-			var todisplay;
-/*
-			if (dispArea.hasChildNodes()) {
-				var newDisplay = displayNumber + alreadyDisplayed;
+			
+			while (dispArea.childNodes[0]) {
+				dispArea.childNodes[0].removeChild(dispArea.childNodes[0].childNodes[0]);
+				dispArea.removeChild(dispArea.childNodes[0]);
 			}
 
 			var text;
-			for (var z=alreadyDisplayed; z<newDisplay; z++) {
+			for (var z=0; z<displayNumber; z++) {
 				text = htmlArray[z].toString();
 				var newP = document.createElement("p");
 				var addText = document.createTextNode(text);
@@ -180,7 +179,11 @@
 				dispArea.appendChild(newP);
 			}
 
-			alreadyDisplayed = newDisplay;*/
+		}
+
+		function search () {
+			// function will narrow search
+
 		}
 
 
@@ -238,7 +241,7 @@
 			</form>
 		</p>
 		<p>
-			<button type = "submit" onClick="displayResults();">Search</button>
+			<button type = "submit" onClick="search();">Search</button>
 		</p>
 		<div id = "results"></div>
 	</body>
