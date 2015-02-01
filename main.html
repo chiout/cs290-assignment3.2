@@ -13,6 +13,7 @@
 			var json = false;
 			var javascript = false;
 			var sql = false;
+			var searchArray = [];
 
 
 			window.onload = function () {
@@ -176,6 +177,7 @@
 			var text;
 			for (var z=0; z<displayNumber; z++) {
 				text = htmlArray[z].toString();
+				searchArray[z] = text; //dunno if necessary
 				var newP = document.createElement("p");
 				var addText = document.createTextNode(text);
 				newP.appendChild(addText);
@@ -186,17 +188,64 @@
 
 		function search () {
 			// function will narrow search
-			var dispArea = document.getElementById("results");
+			var displArea = document.getElementById("results");
+			var languageText;
+			var c=0;
+			var htmlText;
+			
+			if (displArea.childNodes[0]) {
+	
+				if (python === true) {
 
-			if (dispArea.childNodes[0]) {
-				
+					while (c < languageArray.length) {
+						languageText = String(languageArray[c]);
+
+						if (languageText.toLowerCase() !== "python") {
+							htmlText = htmlArray[c].toString();
+							//console.log(displArea.childNodes[0].childNodes[0].nodeValue);
+							for (var w=0; w<displayNumber; w++) {
+								//var nValue = displArea.childNodes[0].childNodes[0].nodeValue;
+								if (htmlText == searchArray[w]) {
+									displArea.childNodes[w].removeChild(displArea.childNodes[w].childNodes[0]);
+									displArea.removeChild(displArea.childNodes[w]);
+								}
+							}
+						}						
+						c=c+1;
+						console.log(languageArray.length);						
+					}
+				}
+
+
+				if (json === true) {
+
+					while (c < languageArray.length) {
+						languageText = String(languageArray[c]);
+
+						if (languageText.toLowerCase() !== "json") {
+							htmlText = htmlArray[c].toString();
+							
+							for (w=0; w<displayNumber; w++) {
+									nValue = displArea.childNodes[0].childNodes[0].nodeValue;
+								if (htmlText == nValue) {
+									displArea.childNodes[w].removeChild(displArea.childNodes[w].childNodes[0]);
+									displArea.removeChild(displArea.childNodes[w]);
+								}
+							}
+						}						
+						c=c+1;
+						console.log(languageArray.length);						
+					}
+				}
+
+
 			}
 			else {
 				var message = "Please select a number of results first!";
 				var newP = document.createElement("p");
 				var addText = document.createTextNode(message);
 				newP.appendChild(addText);
-				dispArea.appendChild(newP);
+				displArea.appendChild(newP);
 			}
 
 		}
