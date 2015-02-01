@@ -36,6 +36,7 @@
 				var opt7 = document.getElementById("results2");
 				var opt8 = document.getElementById("results3");
 				var opt9 = document.getElementById("results4");
+				var opt10 = document.getElementById("results5");
 
 				opt1.onclick = setNumber30;
 				opt2.onclick = setNumber60;
@@ -46,55 +47,65 @@
 				opt7.onclick = setLang2;
 				opt8.onclick = setLang3;
 				opt9.onclick = setLang4;
+				opt10.onclick = setLang5;
 
 				function setNumber30 () {
 					displayNumber = 30;
 					totalDisplayed = displayNumber;
-					console.log(number);
+					//console.log(number);
 				}
 
 				function setNumber60 () {
 					displayNumber = 60;
 					totalDisplayed = displayNumber;
-					console.log(number);
+					//console.log(number);
 				}
 
 				function setNumber90 () {
 					displayNumber = 90;
 					totalDisplayed = displayNumber;
-					console.log(number);
+					//console.log(number);
 				}
 			
 				function setNumber120 () {
 					displayNumber = 120;
 					totalDisplayed = displayNumber;
-					console.log(number);
+					//console.log(number);
 				}
 
 				function setNumber150 () {
 					displayNumber = 150;
 					totalDisplayed = displayNumber;
-					console.log(number);
+					//console.log(number);
 				}
 
 				function setLang1 () {
 					python = true;
-					console.log(python);
+					//console.log(python);
 				}
 
 				function setLang2 () {
 					json = true;
-					console.log(json);
+					//console.log(json);
 				}
 			
 				function setLang3 () {
 					javascript_l = true;
-					console.log(javascript_l);
+					//console.log(javascript_l);
 				}
 
 				function setLang4 () {
 					sql = true;
-					console.log(sql);
+					//console.log(sql);
+				}
+
+				function setLang5 () {
+					python = false;
+					json = false;
+					javascript_l = false;
+					sql = false;
+					displayResults();
+					//console.log(sql);
 				}
 
 			}
@@ -196,7 +207,7 @@
 			var text;
 			var langText;
 			for (var z=0; z<displayNumber; z++) {
-				text = htmlArray[z].toString();
+				text = String(htmlArray[z]);
 				langText = String(languageArray[z]);
 				searchArrayText1[z] = text; 
 				searchArrayText2[z] = langText; //dunno if necessary
@@ -472,7 +483,7 @@
 			var addMoreText = document.createTextNode(localStorage.getItem('language'));
 			var gistsdesc = document.createTextNode(":    " + localStorage.getItem('description'));
 			var addButton = document.createElement("div");
-			addButton.innerHTML = '<input type ="button" id="id"' + id_value + 'value="Remove from Favorites" onClick="removeFav(this.id);" />';
+			addButton.innerHTML = '<input type ="button" id="id' + id_value + '" value="Remove from Favorites" onClick="removeFav(this.id);" />';
 			newP.appendChild(addText);
 			newP.appendChild(addMoreText);
 			newP.appendChild(gistsdesc);
@@ -496,16 +507,47 @@
 
 			searchArrayText1.splice(index, 1);
 			searchArrayText2.splice(index, 1);
+			htmlArray.splice(index, 1);
+			languageArray.splice(index, 1);
 			favDescrip.splice(index, 1);
 			idArray.splice(index, 1);
 			// removes the entries from ALL the arrays so that they will never reappear in the results
 
 		}
 
-		function removeFav () {
-			
+		function removeFav (id_value) {
+			var strIndex = id_value.slice(2);
+			//console.log(strIndex);	
+			//console.log(localStorage.getItem('description'));
 
+			var theUrl = localStorage.getItem('link');
+			var theLanguage = localStorage.getItem('language');
+			var theId = strIndex;
+			var theDesc = localStorage.getItem('description');
 
+			console.log(theId);
+
+			searchArrayText1.push(theUrl);
+			htmlArray.push(theUrl);
+			languageArray.push(theLanguage);
+			searchArrayText2.push(theLanguage);
+			favDescrip.push(theDesc);
+			idArray.push(theId);
+			// add the information back into the array
+
+			var favButton = document.getElementById(id_value);
+			var buttonDiv = favButton.parentNode;
+			var pNode = buttonDiv.parentNode;
+			var resDiv = pNode.parentNode;
+
+			pNode.removeChild(pNode.childNodes[3]);
+			pNode.removeChild(pNode.childNodes[2]);
+			pNode.removeChild(pNode.childNodes[1]);
+			pNode.removeChild(pNode.childNodes[0]);
+			resDiv.removeChild(pNode);		
+			// the above two sections of code remove the results from displaying in the favorites section
+
+			localStorage.clear();
 
 		}
 
@@ -547,8 +589,7 @@
 					<input type="checkbox" value="json" id="results2">JSON</input>
 					<input type="checkbox" value="javascript" id="results3">Javascript</input>
 					<input type="checkbox" value="sql" id="results4">SQL</input>
-					<input type="checkbox" value="sql" id="results5">No Languages</input>
-					<!-- Selecting No Languages should not do anything -->
+					<input type="checkbox" value="sql" id="results5">No Languages (click to display all)</input>
 			</form>
 		</p>
 		<p>
