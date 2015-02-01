@@ -171,16 +171,21 @@
 
 			while (dispArea.childNodes[0]) {
 				dispArea.childNodes[0].removeChild(dispArea.childNodes[0].childNodes[0]);
+				dispArea.childNodes[0].removeChild(dispArea.childNodes[0].childNodes[0]);
 				dispArea.removeChild(dispArea.childNodes[0]);
 			}
 
 			var text;
+			var langText;
 			for (var z=0; z<displayNumber; z++) {
 				text = htmlArray[z].toString();
+				langText = String(languageArray[z]);
 				searchArray[z] = text; //dunno if necessary
 				var newP = document.createElement("p");
-				var addText = document.createTextNode(text);
+				var addText = document.createTextNode(text + "    ");
+				var addMoreText = document.createTextNode(langText);
 				newP.appendChild(addText);
+				newP.appendChild(addMoreText);
 				dispArea.appendChild(newP);
 			}
 
@@ -197,48 +202,26 @@
 	
 				if (python === true) {
 
-					while (c < languageArray.length) {
-						languageText = String(languageArray[c]);
+					for (var w=0; w<displayNumber; w++) {
+						var pNode = displArea.childNodes[w];
 
-						if (languageText.toLowerCase() !== "python") {
-							htmlText = htmlArray[c].toString();
-							//console.log(displArea.childNodes[0].childNodes[0].nodeValue);
-							for (var w=0; w<displayNumber; w++) {
-								//var nValue = displArea.childNodes[0].childNodes[0].nodeValue;
-								if (htmlText == searchArray[w]) {
-									displArea.childNodes[w].removeChild(displArea.childNodes[w].childNodes[0]);
-									displArea.removeChild(displArea.childNodes[w]);
-								}
+						if (pNode.childNodes.length === 1) {
+								pNode.removeChild(pNode.childNodes[0]);
+								displArea.removeChild(pNode);
+						}
+						else {
+							var langNode = displArea.childNodes[w].childNodes[1];
+							var langValue = langNode.nodeValue;
+							if (langValue.toLowerCase() !== "python") {
+								console.log(langValue + w);
+								console.log(displArea.childNodes[w].childNodes[0]);
+								pNode.removeChild(pNode.childNodes[0]);
+								pNode.removeChild(pNode.childNodes[0]);
+								displArea.removeChild(pNode);
 							}
-						}						
-						c=c+1;
-						console.log(languageArray.length);						
+						}
 					}
 				}
-
-
-				if (json === true) {
-
-					while (c < languageArray.length) {
-						languageText = String(languageArray[c]);
-
-						if (languageText.toLowerCase() !== "json") {
-							htmlText = htmlArray[c].toString();
-							
-							for (w=0; w<displayNumber; w++) {
-									nValue = displArea.childNodes[0].childNodes[0].nodeValue;
-								if (htmlText == nValue) {
-									displArea.childNodes[w].removeChild(displArea.childNodes[w].childNodes[0]);
-									displArea.removeChild(displArea.childNodes[w]);
-								}
-							}
-						}						
-						c=c+1;
-						console.log(languageArray.length);						
-					}
-				}
-
-
 			}
 			else {
 				var message = "Please select a number of results first!";
