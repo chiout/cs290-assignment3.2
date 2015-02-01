@@ -41,27 +41,27 @@
 				opt9.onclick = setLang4;
 
 				function setNumber30 () {
-					displayNumber = 1;
+					displayNumber = 30;
 					console.log(number);
 				}
 
 				function setNumber60 () {
-					displayNumber = 2;
+					displayNumber = 60;
 					console.log(number);
 				}
 
 				function setNumber90 () {
-					displayNumber = 3;
+					displayNumber = 90;
 					console.log(number);
 				}
 			
 				function setNumber120 () {
-					displayNumber = 4;
+					displayNumber = 120;
 					console.log(number);
 				}
 
 				function setNumber150 () {
-					displayNumber = 5;
+					displayNumber = 150;
 					console.log(number);
 				}
 
@@ -161,10 +161,13 @@
 			}
 		}
 		
+
+		
+
 		function displayResults () {
 			
 			var dispArea = document.getElementById("results");
-			
+
 			while (dispArea.childNodes[0]) {
 				dispArea.childNodes[0].removeChild(dispArea.childNodes[0].childNodes[0]);
 				dispArea.removeChild(dispArea.childNodes[0]);
@@ -183,6 +186,18 @@
 
 		function search () {
 			// function will narrow search
+			var dispArea = document.getElementById("results");
+
+			if (dispArea.childNodes[0]) {
+				
+			}
+			else {
+				var message = "Please select a number of results first!";
+				var newP = document.createElement("p");
+				var addText = document.createTextNode(message);
+				newP.appendChild(addText);
+				dispArea.appendChild(newP);
+			}
 
 		}
 
