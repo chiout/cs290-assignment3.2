@@ -14,6 +14,8 @@
 			var javascript = false;
 			var sql = false;
 			var searchArray = [];
+			var searchArrayText1 = [];
+			var searchArrayText2 = [];
 
 
 			window.onload = function () {
@@ -180,7 +182,8 @@
 			for (var z=0; z<displayNumber; z++) {
 				text = htmlArray[z].toString();
 				langText = String(languageArray[z]);
-				searchArray[z] = text; //dunno if necessary
+				searchArrayText1[z] = text; 
+				searchArrayText2[z] = langText; //dunno if necessary
 				var newP = document.createElement("p");
 				var addText = document.createTextNode(text + "    ");
 				var addMoreText = document.createTextNode(langText);
@@ -196,6 +199,7 @@
 			var displArea = document.getElementById("results");
 			var languageText;
 			var w=0;
+			var c=0;
 			var htmlText;
 			
 			if (displArea.childNodes[0]) {
@@ -203,63 +207,70 @@
 				if (python === true) {
 
 					while (w < displayNumber) {
-					//for (var w=0; w<(displayNumber*2); w++) {
-						var pNode = displArea.childNodes[w];
-
-						//console.log(w);
-
-						/*
-						if (pNode.childNodes.length === 1) {
-								pNode.removeChild(pNode.childNodes[0]);
-								displArea.removeChild(pNode);
+						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
+						if (languageText.toLowerCase() === "python") {
+							console.log (languageText + " " + w);
+							console.log (displArea.childNodes[w].childNodes[0]);
+							searchArray[c] = w;
+							c = c+1;
 						}
-						else {*/
-							//var langNode = displArea.childNodes[w].childNodes[1]; // PROBLEMS
-							//console.log(w);
-							//var langValue = langNode.nodeValue;
-
-							var langValue = pNode.childNodes[1].nodeValue;
-							//console.log(w);
-							if (langValue.toLowerCase() !== "python") {
-								console.log(langValue + w);
-								console.log(displArea.childNodes[w].childNodes[0]);
-								pNode.removeChild(pNode.childNodes[0]);
-								//pNode.removeChild(pNode.childNodes[0]);
-								displArea.removeChild(pNode);
-							//}
-						}
-						w = w + 1;
+						w=w+1;
 					}
+
+					while (displArea.childNodes[0]) {
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.removeChild(displArea.childNodes[0]);
+					}
+
+					var flag = false;
+					for (var h=0; h<displayNumber; h++) {
+					 
+						for (var g=0; g<searchArray.length; g++) {
+							if (searchArray[g] === h) {
+								flag = true;
+							}
+						}
+
+						if (flag === true) {
+
+							var htext = searchArrayText1[h];
+							var lText = searchArrayText2[h];
+							var newP = document.createElement("p");
+							var addText = document.createTextNode(htext + "    ");
+							var addMoreText = document.createTextNode(lText);
+							newP.appendChild(addText);
+							newP.appendChild(addMoreText);
+							displArea.appendChild(newP);
+
+							flag = false;
+
+						}
+				
+
 				}
-			}
+			
+
+
+
+
+
+
+			} /*
 			else {
 				var message = "Please select a number of results first!";
 				var newP = document.createElement("p");
 				var addText = document.createTextNode(message);
 				newP.appendChild(addText);
 				displArea.appendChild(newP);
-			}
+			} */
 
 		}
+	}
 
 
 
-/*
-				function getArray (input) {
-					var parent = input[0].files;
-					for (var prop in parent) {
-						var fileName = prop;
-					}
-					console.log(fileName);
-					for (var property in parent[fileName]) {
-						if (property === "language") {
-							console.log (parent[fileName][property]);
-						}
-					}
-					//for (var i=0; i<input.length; i++) {
-						// isolate html_url and the url (before files, count); make array and return it
-					//}
-				}*/
+
 
 		</script>
 	</head>
