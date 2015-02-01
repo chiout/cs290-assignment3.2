@@ -9,6 +9,7 @@
 			var languageArray = [];
 			var htmlArray = [];
 			var displayNumber;
+			var totalDisplayed;
 			var python = false;
 			var json = false;
 			var javascript_l = false;
@@ -48,26 +49,31 @@
 
 				function setNumber30 () {
 					displayNumber = 30;
+					totalDisplayed = displayNumber;
 					console.log(number);
 				}
 
 				function setNumber60 () {
 					displayNumber = 60;
+					totalDisplayed = displayNumber;
 					console.log(number);
 				}
 
 				function setNumber90 () {
 					displayNumber = 90;
+					totalDisplayed = displayNumber;
 					console.log(number);
 				}
 			
 				function setNumber120 () {
 					displayNumber = 120;
+					totalDisplayed = displayNumber;
 					console.log(number);
 				}
 
 				function setNumber150 () {
 					displayNumber = 150;
+					totalDisplayed = displayNumber;
 					console.log(number);
 				}
 
@@ -166,8 +172,8 @@
 					idArray.push(input[i].id);
 				}
 
-				console.log (descripArray.length);
-				console.log (idArray.length);
+				//console.log (descripArray.length);
+				//console.log (idArray.length);
 			//console.log (htmlArray.length);
 
 			}
@@ -200,7 +206,7 @@
 				//var addText = document.createTextNode("<a href=\"" + text + "\">         ");
 				var addMoreText = document.createTextNode(langText);
 				var addButton = document.createElement("div");
-				addButton.innerHTML = '<input type ="button" id="id' + z +'" value="Add to Favorites" onClick="favorites(this.id);" />';
+				addButton.innerHTML = '<input type ="button" id='+ idArray[z] + ' value="Add to Favorites" onClick="favorites(this.id);" />';
 				newP.appendChild(addText);
 				newP.appendChild(addMoreText);
 				newP.appendChild(addButton);
@@ -210,7 +216,7 @@
 				favDescrip[z] = descripText;
 			}
 
-			console.log(dispArea.childNodes[0].length);
+			//console.log(dispArea.childNodes[0].length);
 
 		}
 
@@ -222,6 +228,7 @@
 			var c=0;
 			var htmlText;
 			var displayCount;
+			var buttonID;
 
 			
 			if (displArea.childNodes[0]) {
@@ -231,9 +238,12 @@
 					while (w < displayNumber) {
 						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
 						if (languageText.toLowerCase() === "python") {
-							console.log (languageText + " " + w);
-							console.log (displArea.childNodes[w].childNodes[2]);
-							searchArray[c] = w;
+							//console.log (languageText + " " + w);
+							//console.log (displArea.childNodes[w].childNodes[2]);
+							buttonID = displArea.childNodes[w].childNodes[2].childNodes[0].id;
+							// http://stackoverflow.com/questions/17428383/get-an-elements-id-and-compare-it-to-a-string-or-another-id
+							// didn't copy a stretch of code, but got inspiration from Darren Davies's code here
+							searchArray[c] = buttonID;
 							c = c+1;
 						}
 						w=w+1;
@@ -246,37 +256,33 @@
 						displArea.removeChild(displArea.childNodes[0]);
 					}
 
-					var flag = false;
-					for (var h=0; h<displayNumber; h++) {
-					 
-						for (var g=0; g<searchArray.length; g++) {
-							if (searchArray[g] === h) {
-								flag = true;
-							}
+					
+
+					for (var g=0; g<searchArray.length; g++) {
+
+						for (var h=0; h<idArray.length; h++) {
+							if (searchArray[g] === idArray[h]) {		
+
+								var htext = searchArrayText1[h];
+								var lText = searchArrayText2[h];
+								var newP = document.createElement("p");
+								var addText = document.createElement("p");
+								addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
+								var addMoreText = document.createTextNode(lText);
+								var addButton = document.createElement("div");
+								addButton.innerHTML = '<input type ="button" id='+ idArray[h] + ' value="Add to Favorites" onClick="favorites(this.id);" />';
+								newP.appendChild(addText);
+								newP.appendChild(addMoreText);
+								newP.appendChild(addButton);
+								displArea.appendChild(newP);
+
+								displayCount = displayCount + 1;
+							}				
+
 						}
-
-						if (flag === true) {
-
-							var htext = searchArrayText1[h];
-							var lText = searchArrayText2[h];
-							var newP = document.createElement("p");
-							var addText = document.createElement("p");
-							addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
-							var addMoreText = document.createTextNode(lText);
-							newP.appendChild(addText);
-							newP.appendChild(addMoreText);
-							displArea.appendChild(newP);
-
-							displayCount = displayCount + 1;
-
-							flag = false;
-
-						}				
-
-					}
-
-					displayNumber = displayCount;
 			
+					}
+					displayNumber = displayCount;
 				}
 
 				if (json === true) {
@@ -284,9 +290,8 @@
 					while (w < displayNumber) {
 						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
 						if (languageText.toLowerCase() === "json") {
-							console.log (languageText + " " + w);
-							console.log (displArea.childNodes[w].childNodes[0]);
-							searchArray[c] = w;
+							buttonID = displArea.childNodes[w].childNodes[2].childNodes[0].id;
+							searchArray[c] = buttonID;
 							c = c+1;
 						}
 						w=w+1;
@@ -299,33 +304,29 @@
 						displArea.removeChild(displArea.childNodes[0]);
 					}
 
-					flag = false;
-					for (h=0; h<displayNumber; h++) {
-					 
-						for (g=0; g<searchArray.length; g++) {
-							if (searchArray[g] === h) {
-								flag = true;
-							}
+					for (g=0; g<searchArray.length; g++) {
+
+						for (h=0; h<idArray.length; h++) {
+							if (searchArray[g] === idArray[h]) {		
+
+								htext = searchArrayText1[h];
+								lText = searchArrayText2[h];
+								newP = document.createElement("p");
+								addText = document.createElement("p");
+								addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
+								addMoreText = document.createTextNode(lText);
+								addButton = document.createElement("div");
+								addButton.innerHTML = '<input type ="button" id='+ idArray[h] + ' value="Add to Favorites" onClick="favorites(this.id);" />';
+								newP.appendChild(addText);
+								newP.appendChild(addMoreText);
+								newP.appendChild(addButton);
+								displArea.appendChild(newP);
+
+								displayCount = displayCount + 1;
+							}				
+
 						}
-
-						if (flag === true) {
-
-							htext = searchArrayText1[h];
-							lText = searchArrayText2[h];
-							newP = document.createElement("p");
-							addText = document.createElement("p");
-							addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
-							addMoreText = document.createTextNode(lText);
-							newP.appendChild(addText);
-							newP.appendChild(addMoreText);
-							displArea.appendChild(newP);
-
-							displayCount = displayCount + 1;
-
-							flag = false;
-
-						}				
-
+			
 					}
 
 					displayNumber = displayCount;
@@ -337,9 +338,8 @@
 					while (w < displayNumber) {
 						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
 						if (languageText.toLowerCase() === "javascript") {
-							console.log (languageText + " " + w);
-							console.log (displArea.childNodes[w].childNodes[0]);
-							searchArray[c] = w;
+							buttonID = displArea.childNodes[w].childNodes[2].childNodes[0].id;
+							searchArray[c] = buttonID;
 							c = c+1;
 						}
 						w=w+1;
@@ -352,33 +352,29 @@
 						displArea.removeChild(displArea.childNodes[0]);
 					}
 
-					flag = false;
-					for (h=0; h<displayNumber; h++) {
-					 
-						for (g=0; g<searchArray.length; g++) {
-							if (searchArray[g] === h) {
-								flag = true;
-							}
+					for (g=0; g<searchArray.length; g++) {
+
+						for (h=0; h<idArray.length; h++) {
+							if (searchArray[g] === idArray[h]) {		
+
+								htext = searchArrayText1[h];
+								lText = searchArrayText2[h];
+								newP = document.createElement("p");
+								addText = document.createElement("p");
+								addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
+								addMoreText = document.createTextNode(lText);
+								addButton = document.createElement("div");
+								addButton.innerHTML = '<input type ="button" id='+ idArray[h] + ' value="Add to Favorites" onClick="favorites(this.id);" />';
+								newP.appendChild(addText);
+								newP.appendChild(addMoreText);
+								newP.appendChild(addButton);
+								displArea.appendChild(newP);
+
+								displayCount = displayCount + 1;
+							}				
+
 						}
-
-						if (flag === true) {
-
-							htext = searchArrayText1[h];
-							lText = searchArrayText2[h];
-							newP = document.createElement("p");
-							addText = document.createElement("p");
-							addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
-							addMoreText = document.createTextNode(lText);
-							newP.appendChild(addText);
-							newP.appendChild(addMoreText);
-							displArea.appendChild(newP);
-
-							displayCount = displayCount + 1;
-
-							flag = false;
-
-						}				
-
+			
 					}
 					displayNumber = displayCount;
 			
@@ -389,9 +385,8 @@
 					while (w < displayNumber) {
 						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
 						if (languageText.toLowerCase() === "sql") {
-							console.log (languageText + " " + w);
-							console.log (displArea.childNodes[w].childNodes[0]);
-							searchArray[c] = w;
+							buttonID = displArea.childNodes[w].childNodes[2].childNodes[0].id;
+							searchArray[c] = buttonID;
 							c = c+1;
 						}
 						w=w+1;
@@ -404,33 +399,29 @@
 						displArea.removeChild(displArea.childNodes[0]);
 					}
 
-					flag = false;
-					for (h=0; h<displayNumber; h++) {
-					 
-						for (g=0; g<searchArray.length; g++) {
-							if (searchArray[g] === h) {
-								flag = true;
-							}
+					for (g=0; g<searchArray.length; g++) {
+
+						for (h=0; h<idArray.length; h++) {
+							if (searchArray[g] === idArray[h]) {		
+
+								htext = searchArrayText1[h];
+								lText = searchArrayText2[h];
+								newP = document.createElement("p");
+								addText = document.createElement("p");
+								addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
+								addMoreText = document.createTextNode(lText);
+								addButton = document.createElement("div");
+								addButton.innerHTML = '<input type ="button" id='+ idArray[h] + ' value="Add to Favorites" onClick="favorites(this.id);" />';
+								newP.appendChild(addText);
+								newP.appendChild(addMoreText);
+								newP.appendChild(addButton);
+								displArea.appendChild(newP);
+
+								displayCount = displayCount + 1;
+							}				
+
 						}
-
-						if (flag === true) {
-
-							htext = searchArrayText1[h];
-							lText = searchArrayText2[h];
-							newP = document.createElement("p");
-							addText = document.createElement("p");
-							addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
-							addMoreText = document.createTextNode(lText);
-							newP.appendChild(addText);
-							newP.appendChild(addMoreText);
-							displArea.appendChild(newP);
-
-							displayCount = displayCount + 1;
-
-							flag = false;
-
-						}				
-
+			
 					}
 					displayNumber = displayCount;
 			
@@ -451,13 +442,21 @@
 		}
 	}
 		var favOrder = 0;
+		var numberDisp = totalDisplayed;
 		function favorites(id_value) {
 			// console.log(id_value);
 
 			// if that works then:
 
-			var strIndex = id_value.slice(2);
-			index = Number(strIndex);
+			for (var y=0; y<idArray.length; y++) {
+				if (id_value === idArray[y]) {
+					var index = y;
+				}
+			}
+
+
+			//var strIndex = id_value.slice(2);
+			//index = Number(strIndex);
 			// console.log(index);
 
 			var favDiv = document.getElementById("favorites");
@@ -471,22 +470,41 @@
 			var addText = document.createElement("p");
 			addText.innerHTML = localStorage.getItem('link');
 			var addMoreText = document.createTextNode(localStorage.getItem('language'));
+			var gistsdesc = document.createTextNode(":    " + localStorage.getItem('description'));
 			var addButton = document.createElement("div");
-			addButton.innerHTML = '<input type ="button" id="id' + favOrder +'" value="Remove from Favorites" onClick="favorites(this.id);" />';
+			addButton.innerHTML = '<input type ="button" id="id"' + id_value + 'value="Remove from Favorites" onClick="removeFav(this.id);" />';
 			newP.appendChild(addText);
 			newP.appendChild(addMoreText);
+			newP.appendChild(gistsdesc);
 			newP.appendChild(addButton);
 			favDiv.appendChild(newP);
 
 			favOrder = favOrder + 1;
 
-			var displArea = document.getElementById("results");
+			var favButton = document.getElementById(id_value);
+			var buttonDiv = favButton.parentNode;
+			var pNode = buttonDiv.parentNode;
+			var resDiv = pNode.parentNode;
+
+			//pNode.removeChild(pNode.childNodes[3]);
+			pNode.removeChild(pNode.childNodes[2]);
+			pNode.removeChild(pNode.childNodes[1]);
+			pNode.removeChild(pNode.childNodes[0]);
+			resDiv.removeChild(pNode);			
+
+			displayNumber = displayNumber - 1;
+
+			searchArrayText1.splice(index, 1);
+			searchArrayText2.splice(index, 1);
+			favDescrip.splice(index, 1);
+			idArray.splice(index, 1);
+			// removes the entries from ALL the arrays so that they will never reappear in the results
+
+		}
+
+		function removeFav () {
 			
 
-			displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[2]);
-			displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[1]);
-			displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
-			displArea.removeChild(displArea.childNodes[0]);
 
 
 		}
@@ -524,7 +542,7 @@
 		</p>
 		<p>
 			<form>
-				<legend>Select a Langauge:</legend>
+				<legend>Select a Langauge: (Must refresh to search for another language)</legend>
 					<input type="checkbox" value="python" id="results1">Python</input>
 					<input type="checkbox" value="json" id="results2">JSON</input>
 					<input type="checkbox" value="javascript" id="results3">Javascript</input>
