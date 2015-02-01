@@ -11,7 +11,7 @@
 			var displayNumber;
 			var python = false;
 			var json = false;
-			var javascript = false;
+			var javascript_l = false;
 			var sql = false;
 			var searchArray = [];
 			var searchArrayText1 = [];
@@ -79,8 +79,8 @@
 				}
 			
 				function setLang3 () {
-					javascript = true;
-					console.log(javascript);
+					javascript_l = true;
+					console.log(javascript_l);
 				}
 
 				function setLang4 () {
@@ -245,18 +245,157 @@
 
 							flag = false;
 
-						}
-				
+						}				
 
-				}
+					}
 			
+				}
+
+				if (json === true) {
+
+					while (w < displayNumber) {
+						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
+						if (languageText.toLowerCase() === "json") {
+							console.log (languageText + " " + w);
+							console.log (displArea.childNodes[w].childNodes[0]);
+							searchArray[c] = w;
+							c = c+1;
+						}
+						w=w+1;
+					}
+
+					while (displArea.childNodes[0]) {
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.removeChild(displArea.childNodes[0]);
+					}
+
+					flag = false;
+					for (h=0; h<displayNumber; h++) {
+					 
+						for (g=0; g<searchArray.length; g++) {
+							if (searchArray[g] === h) {
+								flag = true;
+							}
+						}
+
+						if (flag === true) {
+
+							htext = searchArrayText1[h];
+							lText = searchArrayText2[h];
+							newP = document.createElement("p");
+							addText = document.createTextNode(htext + "    ");
+							addMoreText = document.createTextNode(lText);
+							newP.appendChild(addText);
+							newP.appendChild(addMoreText);
+							displArea.appendChild(newP);
+
+							flag = false;
+
+						}				
+
+					}
+			
+				}
+
+				if (javascript_l === true) {
+
+					while (w < displayNumber) {
+						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
+						if (languageText.toLowerCase() === "javascript") {
+							console.log (languageText + " " + w);
+							console.log (displArea.childNodes[w].childNodes[0]);
+							searchArray[c] = w;
+							c = c+1;
+						}
+						w=w+1;
+					}
+
+					while (displArea.childNodes[0]) {
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.removeChild(displArea.childNodes[0]);
+					}
+
+					flag = false;
+					for (h=0; h<displayNumber; h++) {
+					 
+						for (g=0; g<searchArray.length; g++) {
+							if (searchArray[g] === h) {
+								flag = true;
+							}
+						}
+
+						if (flag === true) {
+
+							htext = searchArrayText1[h];
+							lText = searchArrayText2[h];
+							newP = document.createElement("p");
+							addText = document.createTextNode(htext + "    ");
+							addMoreText = document.createTextNode(lText);
+							newP.appendChild(addText);
+							newP.appendChild(addMoreText);
+							displArea.appendChild(newP);
+
+							flag = false;
+
+						}				
+
+					}
+			
+				}
+
+				if (sql === true) {
+
+					while (w < displayNumber) {
+						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
+						if (languageText.toLowerCase() === "sql") {
+							console.log (languageText + " " + w);
+							console.log (displArea.childNodes[w].childNodes[0]);
+							searchArray[c] = w;
+							c = c+1;
+						}
+						w=w+1;
+					}
+
+					while (displArea.childNodes[0]) {
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.removeChild(displArea.childNodes[0]);
+					}
+
+					flag = false;
+					for (h=0; h<displayNumber; h++) {
+					 
+						for (g=0; g<searchArray.length; g++) {
+							if (searchArray[g] === h) {
+								flag = true;
+							}
+						}
+
+						if (flag === true) {
+
+							htext = searchArrayText1[h];
+							lText = searchArrayText2[h];
+							newP = document.createElement("p");
+							addText = document.createTextNode(htext + "    ");
+							addMoreText = document.createTextNode(lText);
+							newP.appendChild(addText);
+							newP.appendChild(addMoreText);
+							displArea.appendChild(newP);
+
+							flag = false;
+
+						}				
+
+					}
+			
+				}
 
 
 
 
-
-
-			} /*
+				 /*
 			else {
 				var message = "Please select a number of results first!";
 				var newP = document.createElement("p");
