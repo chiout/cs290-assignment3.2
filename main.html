@@ -202,23 +202,30 @@
 	
 				if (python === true) {
 
-					for (var w=0; w<displayNumber; w++) {
+					for (var w=0; w<(displayNumber*2); w++) {
 						var pNode = displArea.childNodes[w];
 
+						//console.log(w);
+
+						/*
 						if (pNode.childNodes.length === 1) {
 								pNode.removeChild(pNode.childNodes[0]);
 								displArea.removeChild(pNode);
 						}
-						else {
-							var langNode = displArea.childNodes[w].childNodes[1];
-							var langValue = langNode.nodeValue;
-							if (langValue.toLowerCase() !== "python") {
+						else {*/
+							//var langNode = displArea.childNodes[w].childNodes[1]; // PROBLEMS
+							//console.log(w);
+							//var langValue = langNode.nodeValue;
+
+							var langValue = pNode.childNodes[1].nodeValue;
+							//console.log(w);
+							if (langValue.toLowerCase() !== "python" || langValue === null) {
 								console.log(langValue + w);
 								console.log(displArea.childNodes[w].childNodes[0]);
 								pNode.removeChild(pNode.childNodes[0]);
-								pNode.removeChild(pNode.childNodes[0]);
+								//pNode.removeChild(pNode.childNodes[0]);
 								displArea.removeChild(pNode);
-							}
+							//}
 						}
 					}
 				}
