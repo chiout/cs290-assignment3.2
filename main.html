@@ -16,6 +16,8 @@
 			var searchArray = [];
 			var searchArrayText1 = [];
 			var searchArrayText2 = [];
+			var descripArray = [];
+			var idArray = [];
 
 
 			window.onload = function () {
@@ -158,7 +160,13 @@
 						}
 					}	
 
+					descripArray.push(input[i].description);
+					
+					idArray.push(input[i].id);
 				}
+
+				console.log (descripArray.length);
+				console.log (idArray.length);
 			//console.log (htmlArray.length);
 
 			}
@@ -408,6 +416,8 @@
 	}
 
 
+	
+
 
 
 
@@ -444,11 +454,16 @@
 					<input type="checkbox" value="json" id="results2">JSON</input>
 					<input type="checkbox" value="javascript" id="results3">Javascript</input>
 					<input type="checkbox" value="sql" id="results4">SQL</input>
+					<input type="checkbox" value="sql" id="results5">No Languages</input>
+					<!-- Selecting No Languages should not do anything -->
 			</form>
 		</p>
 		<p>
 			<button type = "submit" onClick="search();">Search</button>
 		</p>
+		<h4>Favorites:</h4>
+		<div id = "favorites"></div>
+		<h4>Results:</h4>
 		<div id = "results"></div>
 	</body>
 
