@@ -195,14 +195,15 @@
 			// function will narrow search
 			var displArea = document.getElementById("results");
 			var languageText;
-			var c=0;
+			var w=0;
 			var htmlText;
 			
 			if (displArea.childNodes[0]) {
 	
 				if (python === true) {
 
-					for (var w=0; w<(displayNumber*2); w++) {
+					while (w < displayNumber) {
+					//for (var w=0; w<(displayNumber*2); w++) {
 						var pNode = displArea.childNodes[w];
 
 						//console.log(w);
@@ -219,7 +220,7 @@
 
 							var langValue = pNode.childNodes[1].nodeValue;
 							//console.log(w);
-							if (langValue.toLowerCase() !== "python" || langValue === null) {
+							if (langValue.toLowerCase() !== "python") {
 								console.log(langValue + w);
 								console.log(displArea.childNodes[w].childNodes[0]);
 								pNode.removeChild(pNode.childNodes[0]);
@@ -227,6 +228,7 @@
 								displArea.removeChild(pNode);
 							//}
 						}
+						w = w + 1;
 					}
 				}
 			}
