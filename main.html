@@ -4,10 +4,15 @@
 	<head>
 		<script>
 
-			var number;
+			var number=5;
 			var count = 1;
 			var languageArray = [];
 			var htmlArray = [];
+			var displayNumber;
+			var python = false;
+			var json = false;
+			var javascript = false;
+			var sql = false;
 
 
 			window.onload = function () {
@@ -20,35 +25,64 @@
 				var opt4 = document.getElementById("noResults4");
 				var opt5 = document.getElementById("noResults5");
 
+				var opt6 = document.getElementById("results1");
+				var opt7 = document.getElementById("results2");
+				var opt8 = document.getElementById("results3");
+				var opt9 = document.getElementById("results4");
+
 				opt1.onclick = setNumber30;
 				opt2.onclick = setNumber60;
 				opt3.onclick = setNumber90;
 				opt4.onclick = setNumber120;
 				opt5.onclick = setNumber150;
+				opt6.onclick = setLang1;
+				opt7.onclick = setLang2;
+				opt8.onclick = setLang3;
+				opt9.onclick = setLang4;
 
 				function setNumber30 () {
-					number = 1;
+					displayNumber = 1;
 					console.log(number);
 				}
 
 				function setNumber60 () {
-					number = 2;
+					displayNumber = 2;
 					console.log(number);
 				}
 
 				function setNumber90 () {
-					number = 3;
+					displayNumber = 3;
 					console.log(number);
 				}
 			
 				function setNumber120 () {
-					number = 4;
+					displayNumber = 4;
 					console.log(number);
 				}
 
 				function setNumber150 () {
-					number = 5;
+					displayNumber = 5;
 					console.log(number);
+				}
+
+				function setLang1 () {
+					python = true;
+					console.log(python);
+				}
+
+				function setLang2 () {
+					json = true;
+					console.log(json);
+				}
+			
+				function setLang3 () {
+					javascript = true;
+					console.log(javascript);
+				}
+
+				function setLang4 () {
+					sql = true;
+					console.log(sql);
 				}
 
 			}
@@ -95,12 +129,12 @@
 				function ifready() {
 					if (request.readyState === 4) {
 						var data = JSON.parse(request.responseText);
-						console.log(data[0].html_url);
+						console.log(data[1].html_url);
 						getArray(data);
 					}
-					else {
-						document.getElementById("test").innerHTML = "no success!";
-					}
+					//else {
+						//document.getElementById("test").innerHTML = "no success!";
+					//}
 				}
 				
 
@@ -128,16 +162,25 @@
 		}
 
 		function displayResults () {
-
 			var dispArea = document.getElementById("results");
+			var i = 0
+			var alreadyDisplayed = 0;
+			var todisplay;
+/*
+			if (dispArea.hasChildNodes()) {
+				var newDisplay = displayNumber + alreadyDisplayed;
+			}
+
 			var text;
-			for (var z=0; z<htmlArray.length; z++) {
+			for (var z=alreadyDisplayed; z<newDisplay; z++) {
 				text = htmlArray[z].toString();
 				var newP = document.createElement("p");
 				var addText = document.createTextNode(text);
 				newP.appendChild(addText);
 				dispArea.appendChild(newP);
 			}
+
+			alreadyDisplayed = newDisplay;*/
 		}
 
 
@@ -163,7 +206,10 @@
 	</head>
 
 	<body>
-		<h3>Please select the number of results and click on 'Connect to Gist'. Afterwards, please click 'Show Results'.</h3>
+		<h3>Please 'Connect to Gist' first. Afterwards, select the number of results and click on 'Show Results'.</h3>
+		<p>
+			<button type = "submit" onClick="controlGist();">Connect to Gists</button>
+		</p>
 		<p>
 			<form id = "resultsForm">
 				<legend>Select the Number of Results:</legend>
@@ -180,14 +226,20 @@
 			</form>
 		</p>
 		<p>
-			<button type = "submit" onClick="controlGist();">Connect to Gists</button>
-		</p>
-		<p>
 			<button type = "submit" onClick="displayResults();">Show Results</button>
 		</p>
-		<div id = "test">
-			successful?
-		</div>
+		<p>
+			<form>
+				<legend>Select a Langauge:</legend>
+					<input type="checkbox" value="python" id="results1">Python</input>
+					<input type="checkbox" value="json" id="results2">JSON</input>
+					<input type="checkbox" value="javascript" id="results3">Javascript</input>
+					<input type="checkbox" value="sql" id="results4">SQL</input>
+			</form>
+		</p>
+		<p>
+			<button type = "submit" onClick="displayResults();">Search</button>
+		</p>
 		<div id = "results"></div>
 	</body>
 
