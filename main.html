@@ -17,6 +17,7 @@
 			var searchArrayText1 = [];
 			var searchArrayText2 = [];
 			var descripArray = [];
+			var favDescrip = [];
 			var idArray = [];
 
 
@@ -180,7 +181,8 @@
 			var dispArea = document.getElementById("results");
 
 			while (dispArea.childNodes[0]) {
-				dispArea.childNodes[0].removeChild(dispArea.childNodes[0].childNodes[0]);
+				dispArea.childNodes[0].removeChild(dispArea.childNodes[0].childNodes[2]);
+				dispArea.childNodes[0].removeChild(dispArea.childNodes[0].childNodes[1]);
 				dispArea.childNodes[0].removeChild(dispArea.childNodes[0].childNodes[0]);
 				dispArea.removeChild(dispArea.childNodes[0]);
 			}
@@ -193,12 +195,22 @@
 				searchArrayText1[z] = text; 
 				searchArrayText2[z] = langText; //dunno if necessary
 				var newP = document.createElement("p");
-				var addText = document.createTextNode(text + "    ");
+				var addText = document.createElement("p");
+				addText.innerHTML = '<a href=\"' + text + '">' + text + '</a>         ';
+				//var addText = document.createTextNode("<a href=\"" + text + "\">         ");
 				var addMoreText = document.createTextNode(langText);
+				var addButton = document.createElement("div");
+				addButton.innerHTML = '<input type ="button" id="id' + z +'" value="Add to Favorites" onClick="favorites(this.id);" />';
 				newP.appendChild(addText);
 				newP.appendChild(addMoreText);
+				newP.appendChild(addButton);
 				dispArea.appendChild(newP);
+
+				descripText = String(descripArray[z]);
+				favDescrip[z] = descripText;
 			}
+
+			console.log(dispArea.childNodes[0].length);
 
 		}
 
@@ -209,6 +221,8 @@
 			var w=0;
 			var c=0;
 			var htmlText;
+			var displayCount;
+
 			
 			if (displArea.childNodes[0]) {
 	
@@ -218,7 +232,7 @@
 						languageText = displArea.childNodes[w].childNodes[1].nodeValue;
 						if (languageText.toLowerCase() === "python") {
 							console.log (languageText + " " + w);
-							console.log (displArea.childNodes[w].childNodes[0]);
+							console.log (displArea.childNodes[w].childNodes[2]);
 							searchArray[c] = w;
 							c = c+1;
 						}
@@ -226,7 +240,8 @@
 					}
 
 					while (displArea.childNodes[0]) {
-						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[2]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[1]);
 						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
 						displArea.removeChild(displArea.childNodes[0]);
 					}
@@ -245,17 +260,22 @@
 							var htext = searchArrayText1[h];
 							var lText = searchArrayText2[h];
 							var newP = document.createElement("p");
-							var addText = document.createTextNode(htext + "    ");
+							var addText = document.createElement("p");
+							addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
 							var addMoreText = document.createTextNode(lText);
 							newP.appendChild(addText);
 							newP.appendChild(addMoreText);
 							displArea.appendChild(newP);
+
+							displayCount = displayCount + 1;
 
 							flag = false;
 
 						}				
 
 					}
+
+					displayNumber = displayCount;
 			
 				}
 
@@ -273,7 +293,8 @@
 					}
 
 					while (displArea.childNodes[0]) {
-						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[2]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[1]);
 						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
 						displArea.removeChild(displArea.childNodes[0]);
 					}
@@ -292,17 +313,22 @@
 							htext = searchArrayText1[h];
 							lText = searchArrayText2[h];
 							newP = document.createElement("p");
-							addText = document.createTextNode(htext + "    ");
+							addText = document.createElement("p");
+							addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
 							addMoreText = document.createTextNode(lText);
 							newP.appendChild(addText);
 							newP.appendChild(addMoreText);
 							displArea.appendChild(newP);
+
+							displayCount = displayCount + 1;
 
 							flag = false;
 
 						}				
 
 					}
+
+					displayNumber = displayCount;
 			
 				}
 
@@ -320,7 +346,8 @@
 					}
 
 					while (displArea.childNodes[0]) {
-						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[2]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[1]);
 						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
 						displArea.removeChild(displArea.childNodes[0]);
 					}
@@ -339,17 +366,21 @@
 							htext = searchArrayText1[h];
 							lText = searchArrayText2[h];
 							newP = document.createElement("p");
-							addText = document.createTextNode(htext + "    ");
+							addText = document.createElement("p");
+							addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
 							addMoreText = document.createTextNode(lText);
 							newP.appendChild(addText);
 							newP.appendChild(addMoreText);
 							displArea.appendChild(newP);
+
+							displayCount = displayCount + 1;
 
 							flag = false;
 
 						}				
 
 					}
+					displayNumber = displayCount;
 			
 				}
 
@@ -367,7 +398,8 @@
 					}
 
 					while (displArea.childNodes[0]) {
-						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[2]);
+						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[1]);
 						displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
 						displArea.removeChild(displArea.childNodes[0]);
 					}
@@ -386,17 +418,21 @@
 							htext = searchArrayText1[h];
 							lText = searchArrayText2[h];
 							newP = document.createElement("p");
-							addText = document.createTextNode(htext + "    ");
+							addText = document.createElement("p");
+							addText.innerHTML = '<a href=\"' + htext + '">' + htext + '</a>         ';
 							addMoreText = document.createTextNode(lText);
 							newP.appendChild(addText);
 							newP.appendChild(addMoreText);
 							displArea.appendChild(newP);
+
+							displayCount = displayCount + 1;
 
 							flag = false;
 
 						}				
 
 					}
+					displayNumber = displayCount;
 			
 				}
 
@@ -414,7 +450,46 @@
 
 		}
 	}
+		var favOrder = 0;
+		function favorites(id_value) {
+			// console.log(id_value);
 
+			// if that works then:
+
+			var strIndex = id_value.slice(2);
+			index = Number(strIndex);
+			// console.log(index);
+
+			var favDiv = document.getElementById("favorites");
+
+			var hLink = '<a href=\"' + searchArrayText1[index] + '">' + searchArrayText1[index] + '</a>         ';
+			localStorage.setItem('link', hLink);
+			localStorage.setItem('language', searchArrayText2[index]);
+			localStorage.setItem('description', favDescrip[index]);
+
+			var newP = document.createElement("p");
+			var addText = document.createElement("p");
+			addText.innerHTML = localStorage.getItem('link');
+			var addMoreText = document.createTextNode(localStorage.getItem('language'));
+			var addButton = document.createElement("div");
+			addButton.innerHTML = '<input type ="button" id="id' + favOrder +'" value="Remove from Favorites" onClick="favorites(this.id);" />';
+			newP.appendChild(addText);
+			newP.appendChild(addMoreText);
+			newP.appendChild(addButton);
+			favDiv.appendChild(newP);
+
+			favOrder = favOrder + 1;
+
+			var displArea = document.getElementById("results");
+			
+
+			displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[2]);
+			displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[1]);
+			displArea.childNodes[0].removeChild(displArea.childNodes[0].childNodes[0]);
+			displArea.removeChild(displArea.childNodes[0]);
+
+
+		}
 
 	
 
